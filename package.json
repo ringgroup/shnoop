@@ -1,0 +1,17 @@
+{
+  "name": "shnoop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check api/index.js && node --check lib/security.js && node --check lib/store.js && node --check lib/read-tools.js && node --check lib/rpc.js",
+    "scan": "node scripts/scan.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

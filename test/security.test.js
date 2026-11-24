@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {randomBytes} from 'node:crypto';
+import {seal,unseal,authorized,SCOPES,stateValue,stateHash,validatedOrigin,validTokens,queryForRead} from '../lib/security.js';
+test('caller auth fails closed',()=>{assert.equal(authorized('',undefined),false);assert.equal(authorized('Bearer wrong','correct'),false);assert.equal(authorized('Bearer correct','correct'),true);});
+test('encrypted record authenticates and uses unique IV',()=>{const key=randomBytes(32).toString('hex');const v={test:'fixture'};const a=seal(v,key),b=seal(v,key);assert.notEqual(a,b);assert.deepEqual(unseal(a,key),v);const bytes=Buffer.from(a,'base64');bytes[30]^=1;assert.throws(()=>unseal(bytes.toString('base64'),key));assert.throws(()=>seal(v,''));});
+test('state is random and hashed',()=>{const a=stateValue();assert.match(a,/^[a-f0-9]{64}$/);assert.notEqual(a,stateValue());assert.notEqual(stateHash(a),a);});
+test('production origin must be HTTPS origin only',()=>{assert.equal(validatedOrigin('https://test.invalid/'),'https://test.invalid');for(const s of ['http://test.invalid','https://test.invalid/a','https://test.invalid/?code=1'])assert.throws(()=>validatedOrigin(s));});
+test('scope validation rejects excess and missing scopes',()=>{const v={access_token:'fixture-a',refresh_token:'fixture-r',expires_in:3600,scope:SCOPES.join(' ')};assert.ok(validTokens(v).expires_at>Date.now());assert.throws(()=>validTokens({...v,scope:v.scope+' write:unknown'}));assert.throws(()=>validTokens({...v,scope:'read:sleep'}));assert.throws(()=>validTokens({...v,refresh_token:undefined}));});
+test('read input is bounded',()=>{assert.equal(queryForRead().get('limit'),'7');for(const limit of [0,26,-1,'7'])assert.throws(()=>queryForRead({limit}));assert.throws(()=>queryForRead({start:'bad'}));});

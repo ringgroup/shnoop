@@ -6,9 +6,9 @@ A self-hosted, read-only MCP connector, built for recommended use with a WHOOP d
 
 A gift from the RingGroup founder. Made to be forked, understood, and improved. 💚
 
-> Private release candidate. Public release is pending owner review, including WHOOP's brand and API terms. This project is independent and is not affiliated with, endorsed by, or sponsored by WHOOP. WHOOP is a trademark of its owner. No WHOOP logos are included.
+> This project is independent and is not affiliated with, endorsed by, or sponsored by WHOOP. WHOOP is a trademark of its owner. No WHOOP logos are included.
 
-## Small server, useful questions
+## 💬 Small server, useful questions
 
 - "How did I sleep?"
 - "Show my latest recovery, HRV, and resting heart rate."
@@ -16,7 +16,7 @@ A gift from the RingGroup founder. Made to be forked, understood, and improved. 
 
 The server exposes 11 read tools across cycles, sleep, recovery, workouts, profile, and body measurements. It uses the official WHOOP API, not private app endpoints. This is synced summary data, not live heart rate, Stress Monitor, medical advice, or emergency monitoring. A missing or pending score is not a normal reading.
 
-## Bring your own everything
+## 🧰 Bring your own everything
 
 ```text
 Your coding agent -> your GitHub, Vercel, and Neon accounts (setup)
@@ -29,7 +29,7 @@ RingGroup does not host your deployment, receive your credentials, or provide a 
 
 **The code is free under MIT. Running it is not guaranteed to be free.** You need your own GitHub, Vercel, Neon, Composio, and WHOOP developer accounts, plus an eligible WHOOP membership/device for meaningful data. Composio's current docs say private custom toolkits require Pro. Review all provider plans, limits, and terms before setup. No paid plan or resource should be purchased without your approval.
 
-## Start here
+## 🚀 Start here
 
 Give your coding agent [AGENTS.md](AGENTS.md), the [account setup guide](docs/ACCOUNTS.md), and ask:
 
@@ -50,7 +50,7 @@ npm run scan
 
 Tests use synthetic fixtures. They do not contact WHOOP or a production database. Real OAuth, token refresh, database concurrency, and the selected client must be tested in **your** deployment. See [verification](docs/SETUP.md#6-verify-before-you-trust-it).
 
-## What's in the box?
+## 📦 What's in the box?
 
 | Path | Purpose |
 | --- | --- |
@@ -65,7 +65,7 @@ Tests use synthetic fixtures. They do not contact WHOOP or a production database
 
 The database stores an encrypted credential record and hashed, expiring OAuth states. It does not store health history or conversations. Refresh tokens stay on the server. A bearer connector key protects every sensitive route. Treat that key like a password: it grants health reads and connection-management access.
 
-## Intentional boundaries
+## 🔒 Intentional boundaries
 
 - One owner per deployment. This is not a multi-user SaaS or an OAuth server for MCP clients.
 - No scheduler, voice delivery, webhooks endpoint, automatic coaching, or push notifications are installed by this repository.
@@ -73,13 +73,13 @@ The database stores an encrypted credential record and hashed, expiring OAuth st
 - No production credentials, personal data, telemetry endpoint, or private deployment addresses are included.
 - The MIT license covers this code, not WHOOP's API/data, trademarks, or provider services. Each operator must meet those services' terms and approval requirements.
 
-## Grow it with us
+## 🌿 Grow it with us
 
 Bug fixes, tests, clearer docs, and small improvements are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). Please use synthetic data in issues and pull requests. Never post health records or credentials.
 
 This template can improve alongside private deployments, but nothing automatically syncs from a private service into this repository. Every change needs a fresh review and secret scan.
 
-## Official references
+## 📚 Official references
 
 - [WHOOP OAuth](https://developer.whoop.com/docs/developing/oauth/)
 - [WHOOP API terms and brand restrictions](https://developer.whoop.com/api-terms-of-use/)
